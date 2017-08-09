@@ -21,7 +21,7 @@ fun setToken(token: String) {
     preferences.edit().putString(TOKEN_KEY, token).apply()
 }
 
-fun getToken(): String? {
+fun getToken(): String {
     val preferences = PreferenceManager.getDefaultSharedPreferences(ApplicationSingleton.instance)
-    return preferences.getString(TOKEN_KEY, null)
+    return preferences.getString(TOKEN_KEY, "")
 }

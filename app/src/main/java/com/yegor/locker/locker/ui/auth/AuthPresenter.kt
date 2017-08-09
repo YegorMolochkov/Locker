@@ -16,7 +16,7 @@ class AuthPresenter(val authView: AuthView, val lifecycleHandler: LifecycleHandl
 
     fun init() {
         val token = getToken()
-        if (token != null) {
+        if (!TextUtils.isEmpty(token)) {
             authView.onLockerScreen()
         }
     }

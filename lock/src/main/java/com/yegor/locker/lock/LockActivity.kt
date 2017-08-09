@@ -1,26 +1,35 @@
 package com.yegor.locker.lock
 
-import android.nfc.NdefMessage
-import android.nfc.NfcAdapter
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_lock.*
 
-class LockActivity : AppCompatActivity() {
+class LockActivity : AppCompatActivity(), LockView {
+
+    private lateinit var mPresenter: LockPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_room)
+        setContentView(R.layout.activity_lock)
+        mPresenter = LockPresenter(this)
+        mPresenter.init()
     }
 
     override fun onResume() {
         super.onResume()
-        val intent = intent
-        if (NfcAdapter.ACTION_NDEF_DISCOVERED == intent.action) {
-            val rawMessages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
-            val message = rawMessages[0] as NdefMessage // only one message transferred
-            Toast.makeText(this, String(message.records[0].payload), Toast.LENGTH_LONG).show()
-        } else
-            Toast.makeText(this, "Waiting for NDEF Message", Toast.LENGTH_LONG).show()
+        mPresenter.onIntent(intent)
+    }
+
+    override fun onInvalidToken() {
+        Toast.makeText(this, "Access Denied!", Toast.LENGTH_LONG).show()
+    }
+
+    override fun setCloseView() {
+        status.setImageResource(R.drawable.ic_lock_black_48dp)
+    }
+
+    override fun setOpenView() {
+        status.setImageResource(R.drawable.ic_lock_open_black_48dp)
     }
 }

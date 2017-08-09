@@ -7,13 +7,14 @@ import android.provider.Settings
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.yegor.locker.locker.R
+import kotlinx.android.synthetic.main.activity_unlock.*
 
 /**
  * Created by Yegor on 07.08.2017.
  */
 class UnlockActivity : AppCompatActivity(), UnlockView {
 
-    private lateinit var mPresenter : UnlockPresenter
+    private lateinit var mPresenter: UnlockPresenter
 
     override fun showNoNfc() {
         Toast.makeText(this, "Sorry this device does not have NFC.", Toast.LENGTH_LONG).show()
@@ -37,6 +38,6 @@ class UnlockActivity : AppCompatActivity(), UnlockView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_unlock)
         mPresenter = UnlockPresenter(this)
-        mPresenter.init()
+        unlock.setOnClickListener { view -> mPresenter.changeStatus() }
     }
 }
