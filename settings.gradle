@@ -1,1 +1,1 @@
-include ':app', ':lock', ':common'
+include ':app', ':lock'

@@ -1,10 +1,14 @@
-package com.yegor.locker.lock
+package com.yegor.locker.lock.ui.lock
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
+import com.yegor.locker.lock.R
 import kotlinx.android.synthetic.main.activity_lock.*
 
+/**
+ * lock single screen
+ */
 class LockActivity : AppCompatActivity(), LockView {
 
     private lateinit var mPresenter: LockPresenter

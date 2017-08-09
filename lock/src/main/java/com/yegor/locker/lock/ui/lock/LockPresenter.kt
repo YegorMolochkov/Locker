@@ -1,18 +1,29 @@
-package com.yegor.locker.lock
+package com.yegor.locker.lock.ui.lock
 
 import android.content.Intent
 import android.nfc.NdefMessage
 import android.nfc.NfcAdapter
+import com.yegor.locker.lock.UNIQUE_DEVICE_TOKEN
+import com.yegor.locker.lock.getStatus
+import com.yegor.locker.lock.setStatus
 
 /**
- * Created by Yegor on 09.08.2017.
+ * Presenter for lock screen
  */
 class LockPresenter(val lockView: LockView) {
 
+    /**
+     * initiates UI
+     */
     fun init() {
         setNewStatusUi(getStatus())
     }
 
+    /**
+     * processes new intent
+     *
+     * @param intent new intent
+     */
     fun onIntent(intent: Intent) {
         if (NfcAdapter.ACTION_NDEF_DISCOVERED == intent.getAction()) {
             val token = intentToToken(intent)

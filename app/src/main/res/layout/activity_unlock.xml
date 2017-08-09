@@ -8,6 +8,6 @@
         android:id="@+id/unlock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="unlock" />
+        android:text="lock/unlock" />
 
 </RelativeLayout>

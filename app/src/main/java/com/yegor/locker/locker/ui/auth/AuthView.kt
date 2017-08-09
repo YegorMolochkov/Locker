@@ -1,13 +1,19 @@
 package com.yegor.locker.locker.ui.auth
 
-import com.yegor.locker.common.ui.LoadingView
+import com.yegor.locker.locker.ui.LoadingView
 
 /**
- * Created by Yegor on 08.08.2017.
+ * Represents login screen
  */
 interface AuthView : LoadingView {
 
+    /**
+     * on successful login
+     */
     fun onLockerScreen()
 
+    /**
+     * on login failed
+     */
     fun showAuthError()
 }

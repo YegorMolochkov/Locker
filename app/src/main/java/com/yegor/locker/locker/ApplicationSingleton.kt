@@ -1,4 +1,4 @@
-package com.yegor.locker.common
+package com.yegor.locker.locker
 
 import android.app.Application
 

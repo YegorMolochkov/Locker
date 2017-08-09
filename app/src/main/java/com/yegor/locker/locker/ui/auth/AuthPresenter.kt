@@ -1,9 +1,9 @@
 package com.yegor.locker.locker.ui.auth
 
 import android.text.TextUtils
-import com.yegor.locker.common.model.Credentials
-import com.yegor.locker.common.networking.AuthService
-import com.yegor.locker.common.networking.ServiceProvider
+import com.yegor.locker.locker.model.Credentials
+import com.yegor.locker.locker.networking.AuthService
+import com.yegor.locker.locker.networking.ServiceProvider
 import com.yegor.locker.locker.*
 import ru.arturvasilov.rxloader.LifecycleHandler
 import rx.android.schedulers.AndroidSchedulers
@@ -14,6 +14,9 @@ import rx.schedulers.Schedulers
  */
 class AuthPresenter(val authView: AuthView, val lifecycleHandler: LifecycleHandler) {
 
+    /**
+     * performs "silent login"
+     */
     fun init() {
         val token = getToken()
         if (!TextUtils.isEmpty(token)) {
@@ -21,8 +24,11 @@ class AuthPresenter(val authView: AuthView, val lifecycleHandler: LifecycleHandl
         }
     }
 
+    /**
+     * request for token for this car
+     */
     fun tryToLogin(credentials: Credentials) {
-        if (TextUtils.isEmpty(credentials.username) || TextUtils.isEmpty(credentials.password)) {
+        if (TextUtils.isEmpty(credentials.serialNumber) || TextUtils.isEmpty(credentials.password)) {
             authView.showAuthError()
         } else {
             val service = ServiceProvider.createService(AuthService::class.java)

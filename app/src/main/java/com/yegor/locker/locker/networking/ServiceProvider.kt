@@ -1,4 +1,4 @@
-package com.yegor.locker.common.networking
+package com.yegor.locker.locker.networking
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient

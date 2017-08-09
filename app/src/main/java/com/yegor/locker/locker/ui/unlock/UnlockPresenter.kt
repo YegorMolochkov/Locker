@@ -7,10 +7,13 @@ import android.nfc.NfcEvent
 import com.yegor.locker.locker.getToken
 
 /**
- * Created by Yegor on 08.08.2017.
+ * Presenter for lock controls screen
  */
 class UnlockPresenter(val unlockView: UnlockView) : NfcAdapter.CreateNdefMessageCallback {
 
+    /**
+     * on button pressed
+     */
     fun changeStatus() {
         val mAdapter = unlockView.getNfcAdapter()
         if (mAdapter == null) {

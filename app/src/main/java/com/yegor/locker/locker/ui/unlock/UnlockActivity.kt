@@ -10,11 +10,18 @@ import com.yegor.locker.locker.R
 import kotlinx.android.synthetic.main.activity_unlock.*
 
 /**
- * Created by Yegor on 07.08.2017.
+ * Screen with lock controls
  */
 class UnlockActivity : AppCompatActivity(), UnlockView {
 
     private lateinit var mPresenter: UnlockPresenter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_unlock)
+        mPresenter = UnlockPresenter(this)
+        unlock.setOnClickListener { view -> mPresenter.changeStatus() }
+    }
 
     override fun showNoNfc() {
         Toast.makeText(this, "Sorry this device does not have NFC.", Toast.LENGTH_LONG).show()
@@ -31,13 +38,5 @@ class UnlockActivity : AppCompatActivity(), UnlockView {
 
     override fun registerCallback(adapter: NfcAdapter, callback: NfcAdapter.CreateNdefMessageCallback) {
         adapter.setNdefPushMessageCallback(callback, this)
-    }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_unlock)
-        mPresenter = UnlockPresenter(this)
-        unlock.setOnClickListener { view -> mPresenter.changeStatus() }
     }
 }
